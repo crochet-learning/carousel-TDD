@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import Carousel from '../src/Carousel';
 import CarouselButton from '../src/CarouselButton';
 import CarouselSlide from '../src/CarouselSlide';
@@ -92,9 +92,31 @@ describe('Carousel', () => {
   it('renders the current slide as a CarouselSlide', () => {
     let slideProps;
     slideProps = wrapper.find(CarouselSlide).props();
-    expect(slideProps).toEqual(slides[0]);
+    expect(slideProps).toEqual({
+      ...CarouselSlide.defaultProps,
+      ...slides[0]
+    });
     wrapper.setState({ slideIndex: 1 });
     slideProps = wrapper.find(CarouselSlide).props();
-    expect(slideProps).toEqual(slides[1]);
+    expect(slideProps).toEqual({
+      ...CarouselSlide.defaultProps,
+      ...slides[1]
+    });
   });
+});
+
+describe('Img', () => {
+  let mounted;
+  const imgUrl = 'https://example.com/default.jpg';
+
+  beforeEach(() => {
+      const Img = CarouselSlide.defaultProps.Img;
+      mounted = mount(
+          <Img src={imgUrl} imgHeight={500} />
+      );
+  });
+
+  it('renders an img with the given src', () => {
+    expect(mounted.containsMatchingElement(<img src={imgUrl} />)).toBe(true);
+  })
 });

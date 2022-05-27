@@ -15,7 +15,7 @@ class Carousel extends React.PureComponent {
   };
 
   static defaultProps = {
-    defaultImgHeight: CarouselSlide.propTypes.imgHeight
+    defaultImgHeight: CarouselSlide.defaultProps.imgHeight
   };
 
   handlePrevClick = () => {

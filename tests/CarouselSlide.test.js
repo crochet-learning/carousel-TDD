@@ -13,15 +13,15 @@ describe('CarouselSlide', () => {
     expect(wrapper.type()).toBe('figure');
   });
 
-  it('renders an img and figcaption as children', () => {
-    expect(wrapper.childAt(0).type()).toBe('img');
+  it('renders props.Img and figcaption as children', () => {
+    expect(wrapper.childAt(0).type()).toBe(CarouselSlide.defaultProps.Img);
     expect(wrapper.childAt(1).type()).toBe('figcaption');
   });
 
   it('passes in an image url', () => {
     const imgUrl = 'example/image.png';
     wrapper.setProps({ imgUrl });
-    const img = wrapper.find('img');
+    const img = wrapper.find(CarouselSlide.defaultProps.Img);
     expect(img.prop('src')).toBe(imgUrl);
   });
 
