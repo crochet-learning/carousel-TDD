@@ -4,51 +4,54 @@ import CarouselButton from './CarouselButton';
 import CarouselSlide from './CarouselSlide';
 
 class Carousel extends React.PureComponent {
-  static propTypes = {
-    defaultImgHeight: CarouselSlide.propTypes.imgHeight,
-    slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
-      .isRequired
-  };
+    static propTypes = {
+        defaultImg: CarouselSlide.propTypes.Img,
+        defaultImgHeight: CarouselSlide.propTypes.imgHeight,
+        slides: PropTypes.arrayOf(PropTypes.shape(CarouselSlide.propTypes))
+            .isRequired
+    };
 
-  state = {
-    slideIndex: 0
-  };
+    state = {
+        slideIndex: 0
+    };
 
-  static defaultProps = {
-    defaultImgHeight: CarouselSlide.defaultProps.imgHeight
-  };
+    static defaultProps = {
+        defaultImg: CarouselSlide.defaultProps.Img,
+        defaultImgHeight: CarouselSlide.defaultProps.imgHeight
+    };
 
-  handlePrevClick = () => {
-    const { slides } = this.props;
-    this.setState(({ slideIndex }) => ({
-      slideIndex: (slideIndex + slides.length - 1) % slides.length
-    }));
-  };
+    handlePrevClick = () => {
+        const {slides} = this.props;
+        this.setState(({slideIndex}) => ({
+            slideIndex: (slideIndex + slides.length - 1) % slides.length
+        }));
+    };
 
-  handleNextClick = () => {
-    const { slides } = this.props;
-    this.setState(({ slideIndex }) => ({
-      slideIndex: (slideIndex + 1) % slides.length
-    }));
-  };
+    handleNextClick = () => {
+        const {slides} = this.props;
+        this.setState(({slideIndex}) => ({
+            slideIndex: (slideIndex + 1) % slides.length
+        }));
+    };
 
-  render() {
-    const { defaultImgHeight, slides, ...rest } = this.props;
-    return (
-      <div {...rest}>
-        <CarouselSlide
-          imgHeight={defaultImgHeight}
-          {...slides[this.state.slideIndex]}
-        />
-        <CarouselButton data-action="prev" onClick={this.handlePrevClick}>
-          Prev
-        </CarouselButton>
-        <CarouselButton data-action="next" onClick={this.handleNextClick}>
-          Next
-        </CarouselButton>
-      </div>
-    );
-  }
+    render() {
+        const {defaultImg, defaultImgHeight, slides, ...rest} = this.props;
+        return (
+            <div {...rest}>
+                <CarouselSlide
+                    Img={defaultImg}
+                    imgHeight={defaultImgHeight}
+                    {...slides[this.state.slideIndex]}
+                />
+                <CarouselButton data-action="prev" onClick={this.handlePrevClick}>
+                    Prev
+                </CarouselButton>
+                <CarouselButton data-action="next" onClick={this.handleNextClick}>
+                    Next
+                </CarouselButton>
+            </div>
+        );
+    }
 }
 
 export default Carousel;
